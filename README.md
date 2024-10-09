@@ -2,9 +2,9 @@
 
 Una fuerza armada, llamada La Alianza, está formando su ejército para restaurar la República en la guerra civil Wollóctica.
 
-La Alianza recluta guerreros que serán parte de su ejército. Para que un guerrero pueda ser reclutado, debe tener una salud mayor a 50 y un poder de al menos 25. La Alianza puede entrenar a sus guerreros de forma individual para mejorar sus habilidades o entrenar a todo el ejército en conjunto.
+La Alianza recluta guerreros que serán parte de su ejército. Para que un guerrero pueda ser reclutado, debe tener una salud mayor a 50 y un poder de al menos 25 unidades. La Alianza puede entrenar a sus guerreros de forma individual para mejorar sus habilidades o entrenar a todo el ejército en conjunto.
 
-La Alianza conoce el número de guerreros en su ejército y el poder total del ejercito se calcula sumando el poder de cada uno, más 25 unidades adicionales por guerrero. Se considera invencible si tiene un ejército poderoso, es decir, si todos sus guerreros tienen un poder superior a 50 unidades o si cuenta con al menos un guerrero campeón. La condición de ser campeón varia según cada guerrero.
+La Alianza conoce el número de guerreros en su ejército, y el poder total del ejército se calcula sumando el poder de cada uno, más 25 unidades adicionales por guerrero. Se considera invencible si tiene un ejército poderoso, es decir, si todos sus guerreros tienen un poder superior a 50 unidades o si cuenta con al menos un guerrero campeón. La condición de ser campeón varía según cada guerrero.
 
 Además, La Alianza tiene la capacidad de emitir dos informes parametrizados:
 - Guerreros débiles: aquellos guerreros cuya energía es igual o inferior al valor informado por parámetro.

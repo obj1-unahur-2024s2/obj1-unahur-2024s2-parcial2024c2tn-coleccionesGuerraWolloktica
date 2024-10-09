@@ -1,0 +1,100 @@
+import alianza.*
+import guerreros.*
+
+describe "group of tests for alianza" {
+
+
+  test "Luke entrena sin cambiar de sable, la Alianza intenta reclutar a Luke pero no puede debido a su bajo poder y Luke aún no es un campeón." {
+    luke.entrenar()
+    alianza.reclutar(luke)
+    assert.notThat(alianza.ejercito().contains(luke))
+    assert.notThat(luke.esCampeon())
+    assert.equals(20, luke.poder())
+    assert.equals(100, luke.salud())
+  }
+
+  test "Luke cambia el sabe al Azul y entrena. La Alianza ahora sí puede reclutarlo y luke pasa a ser campeón" {
+    luke.sable(sableAzul)
+    luke.entrenar()
+    alianza.reclutar(luke)
+    assert.that(alianza.ejercito().contains(luke))
+    assert.that(luke.esCampeon())
+    assert.equals(30, luke.poder())
+    assert.equals(100, luke.salud())
+  }
+
+  test "Yoda alterna para usar la fuerza y entrenar. Su poder aumenta a 100. Pero aún no puede ser reclutado porque su energia esta en 30 unidades aunque es un campeón. "{
+    yoda.alternar()
+    yoda.entrenar()
+    alianza.reclutar(yoda)
+    assert.notThat(alianza.ejercito().contains(yoda))
+    assert.equals(100,yoda.poder())
+    assert.equals(30, yoda.salud())
+  }
+
+  test "Yoda entrena sin usar la fuerza. Ahora puede ser reclutado por la alianza porque su poder se mantiene en 50 pero su energía aumento a 55 unidades."{
+    yoda.entrenar()
+    alianza.reclutar(yoda)
+    assert.that(alianza.ejercito().contains(yoda))
+    assert.equals(50,yoda.poder())
+    assert.equals(55, yoda.salud())
+  }
+
+  test "Arturito no puede ser reclutado"{
+    assert.notThat(alianza.ejercito().contains(arturito))
+  }
+
+  test "Al entrenar salud de Arturito cambia a 60 y su poder se reduce a 78. Ahora sí puede ser reclutado aunque en este momento no es campeón."{
+    arturito.entrenar()
+    alianza.reclutar(arturito)
+    assert.that(alianza.ejercito().contains(arturito))
+    assert.equals(60,arturito.salud())
+    assert.equals(78,arturito.poder())
+    assert.notThat(arturito.esCampeon())
+    
+  }
+
+  test "reclutan a arturito luego de entrenar"{
+    arturito.entrenar()
+    alianza.reclutar(arturito)
+    assert.equals([arturito],alianza.ejercito())
+  }
+  
+  test "C3PO siempre puede ser reclutado por la alizanza. Porque su poder de 30 y salud de 80 unidades no varian." {
+    alianza.reclutar(c3po)
+    assert.that(alianza.ejercito().contains(c3po))
+    assert.equals(80,c3po.salud())
+    assert.equals(30,c3po.poder())
+    assert.notThat(c3po.esCampeon()) 
+  }
+
+  test "C3PO repara el Halcón Milenario y su blindaje y velocidad mejoran a 700 y 1200 respectivamente porque aún no es campeon"{
+    c3po.repararNave()
+    assert.equals(700, halconMilenario.velocidad())
+    assert.equals(1200, halconMilenario.blindaje())
+    assert.notThat(c3po.esCampeon()) 
+  }
+
+  test "C3PO entrena y reparar la nave, su blindaje y velocidad deberían ser 900 y 1400, pero ya es campeón."{
+    c3po.entrenar()
+    c3po.repararNave()
+    assert.equals(900, halconMilenario.velocidad())
+    assert.equals(1400, halconMilenario.blindaje())
+    assert.that(c3po.esCampeon())
+  }
+
+  test "Test sobre la alizana" {
+    [luke, yoda, arturito, c3po].forEach({
+      guerrero => alianza.entrenar(guerrero); alianza.reclutar(guerrero);
+    })
+    assert.equals(3, alianza.tamanioEjercito())
+    assert.equals([yoda, arturito, c3po], alianza.ejercito())
+    assert.equals( 50+25 + 78+25 + 30+25, alianza.poderDelEjercito() )
+    assert.notThat(alianza.ejercitoPoderoso())
+    assert.that(alianza.invencible())
+    assert.equals([yoda], alianza.guerrerosDebiles(59))
+    assert.notThat( alianza.ganarBatalla(250))
+    assert.that(alianza.pocaSaludMuchoPoder())
+    assert.equals(["Din Grogu","C-3P0"], alianza.nombresCampeones())
+  }
+}
